@@ -8,20 +8,20 @@ while (true)
     Console.WriteLine("2. Lägg till kontakt");
     Console.WriteLine("3. Avsluta");
 
-    int choice = ReadLineInt("Välj: ");
-    if (choice == 1)
+    char choice = GetChar("Välj: ");
+    if (choice == '1')
     {
         Console.WriteLine("KONTAKTER");
         Console.WriteLine(contacts);
         Console.ReadLine();
     }
-    else if (choice == 2)
+    else if (choice == '2')
     {
         Console.WriteLine("LÄGG TILL KONTAKT");
         Console.Write("Namn: ");
         contacts += Environment.NewLine + Console.ReadLine();
     }
-    else if (choice == 3)
+    else if (choice == '3')
     {
         Console.WriteLine("AVSLUTAR...");
         Environment.Exit(0);
@@ -33,15 +33,14 @@ while (true)
     }
 }
 
-static int ReadLineInt(string prompt)
+static char GetChar(string prompt)
 {
-    int result;
-    bool success;
-    do
+    Console.Write(prompt);
+    while (true)
     {
-        Console.Write(prompt);
-        success = int.TryParse(Console.ReadLine(), out result);
+        if (Console.KeyAvailable)
+        {
+            return Console.ReadKey(true).KeyChar;
+        }
     }
-    while (!success);
-    return result;
 }
