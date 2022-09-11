@@ -1,4 +1,6 @@
-﻿while (true)
+﻿string contacts = "Jonas Jonasson\nSven Svensson";
+
+while (true)
 {
     Console.Clear();
     Console.WriteLine("ADRESSBOKEN");
@@ -10,10 +12,14 @@
     if (choice == "1")
     {
         Console.WriteLine("KONTAKTER");
+        Console.WriteLine(contacts);
+        Console.ReadLine();
     }
     else if (choice == "2")
     {
         Console.WriteLine("LÄGG TILL KONTAKT");
+        Console.Write("Namn: ");
+        contacts += Environment.NewLine + Console.ReadLine();
     }
     else if (choice == "3")
     {
@@ -23,6 +29,6 @@
     else
     {
         Console.WriteLine("Välj ett alternativ i menyn och tryck enter!");
+        Console.ReadLine();
     }
-    Console.ReadLine();
 }
