@@ -1,7 +1,28 @@
 ﻿while (true)
 {
+    Console.Clear();
     Console.WriteLine("ADRESSBOKEN");
     Console.WriteLine("1. Visa kontakter");
     Console.WriteLine("2. Lägg till kontakt");
     Console.WriteLine("3. Avsluta");
+
+    string? choice = Console.ReadLine();
+    if (choice == "1")
+    {
+        Console.WriteLine("KONTAKTER");
+    }
+    else if (choice == "2")
+    {
+        Console.WriteLine("LÄGG TILL KONTAKT");
+    }
+    else if (choice == "3")
+    {
+        Console.WriteLine("AVSLUTAR...");
+        Environment.Exit(0);
+    }
+    else
+    {
+        Console.WriteLine("Välj ett alternativ i menyn och tryck enter!");
+    }
+    Console.ReadLine();
 }
