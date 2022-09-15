@@ -1,6 +1,5 @@
 ﻿string contacts = "Jonas Jonasson\nSven Svensson";
 string[] names = new string[0];
-string[] numbers = new string[0];
 
 while (true)
 {
@@ -24,11 +23,8 @@ while (true)
     {
         Console.WriteLine("LÄGG TILL KONTAKT");
         Console.Write("Namn: ");
-        // contacts += Environment.NewLine + Console.ReadLine();
         string name = Console.ReadLine();
-        Console.WriteLine("Nummer: ");
-        string number = Console.ReadLine();
-        AddContact(name, number);
+        AddContact(name);
     }
     else if (choice == '3')
     {
@@ -42,7 +38,7 @@ while (true)
     }
 }
 
-void AddContact(string name, string number)
+void AddContact(string name)
 {
     string[] newNamesArray = new string[names.Length + 1];
     for (int i = 0; i < names.Length; i++)
