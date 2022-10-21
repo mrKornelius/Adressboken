@@ -4,6 +4,7 @@ using System.Text.Json;
 class AdressBook
 {
     public int Count { get => _contacts.Count; }
+
     readonly List<Contact> _contacts = new();
 
     public void AddContact(Contact contact)
@@ -21,7 +22,6 @@ class AdressBook
 
     public void Save()
     {
-        string jsonData = JsonSerializer.Serialize(_contacts);
-        File.WriteAllText("contacts.json", jsonData);
+        //Do something here so that all the contacts can be saved?
     }
 }
