@@ -7,6 +7,11 @@ class AdressBook
 
     readonly List<Contact> _contacts = new();
 
+    public AdressBook()
+    {
+        //Load contacts here?
+    }
+
     public void AddContact(Contact contact)
     {
         int lastId = 0;
