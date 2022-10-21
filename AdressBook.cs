@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.Json;
 
 class AdressBook
 {
@@ -16,5 +16,11 @@ class AdressBook
     public ReadOnlyCollection<List<Contact>> GetAllContacts()
     {
         return new ReadOnlyCollection<List<Contact>>((IList<List<Contact>>)_contacts);
+    }
+
+    private void SaveData()
+    {
+        string jsonData = JsonSerializer.Serialize(_contacts);
+        File.WriteAllText("contacts.json", jsonData);
     }
 }
