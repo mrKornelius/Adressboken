@@ -3,6 +3,7 @@ using System.Text.Json;
 
 class AdressBook
 {
+    public int Count { get => _contacts.Count; }
     readonly List<Contact> _contacts = new();
 
     public void AddContact(Contact contact)
@@ -13,12 +14,12 @@ class AdressBook
         _contacts.Add(contact);
     }
 
-    public ReadOnlyCollection<List<Contact>> GetAllContacts()
+    public ReadOnlyCollection<Contact> GetAllContacts()
     {
-        return new ReadOnlyCollection<List<Contact>>((IList<List<Contact>>)_contacts);
+        return new ReadOnlyCollection<Contact>(_contacts);
     }
 
-    private void SaveData()
+    public void Save()
     {
         string jsonData = JsonSerializer.Serialize(_contacts);
         File.WriteAllText("contacts.json", jsonData);

@@ -2,8 +2,8 @@
 {
     private static void Main(string[] args)
     {
-        string contacts = "Jonas Jonasson\nSven Svensson";
-        string[] names = new string[0];
+        AdressBook adressBook = new();
+        AddTestData(adressBook);
 
         while (true)
         {
@@ -13,57 +13,59 @@
             Console.WriteLine("2. Lägg till kontakt");
             Console.WriteLine("3. Avsluta");
 
-            char choice = GetChar("Välj: ");
-            if (choice == '1')
+            int choice = GetIntChar("Välj: ");
+
+            if (choice == 1)
             {
                 Console.WriteLine("KONTAKTER");
-                for (int i = 0; i < names.Length; i++)
+                foreach (var contact in adressBook.GetAllContacts())
                 {
-                    Console.WriteLine(names[i]);
+                    Console.WriteLine(contact.FullName + Environment.NewLine + contact.PhoneNumber);
                 }
                 Console.ReadLine();
             }
-            else if (choice == '2')
+            else if (choice == 2)
             {
                 Console.WriteLine("LÄGG TILL KONTAKT");
-                Console.WriteLine("LÄGG TILL KONTAKT");
-                Console.Write("Namn: ");
-                string name = Console.ReadLine();
-                AddContact(name);
+                Contact newContact = new();
+                Console.Write("Förnamn: ");
+                newContact.FirstName = Console.ReadLine() ?? "";
+                Console.Write("Efernamn: ");
+                newContact.LastName = Console.ReadLine() ?? "";
+                Console.Write("Telefonnummer: ");
+                newContact.PhoneNumber = Console.ReadLine() ?? "";
+                adressBook.AddContact(newContact);
             }
-            else if (choice == '3')
+            else if (choice == 3)
             {
                 Console.WriteLine("AVSLUTAR...");
+                adressBook.Save();
                 Environment.Exit(0);
             }
-            else
-            {
-                Console.WriteLine("Välj ett alternativ i menyn och tryck enter!");
-                Console.ReadLine();
-            }
         }
 
-        void AddContact(string name)
-        {
-            string[] newNamesArray = new string[names.Length + 1];
-            for (int i = 0; i < names.Length; i++)
-            {
-                newNamesArray[i] = names[i];
-            }
-            names[^1] = name;
-            names = newNamesArray;
-        }
-
-        static char GetChar(string prompt)
+        static int GetIntChar(string prompt)
         {
             Console.Write(prompt);
+
+            int parsedInt;
+
             while (true)
             {
-                if (Console.KeyAvailable)
-                {
-                    return Console.ReadKey(true).KeyChar;
-                }
+                var input = Console.ReadKey(true).KeyChar;
+                if (int.TryParse(input.ToString(), out parsedInt)) break;
             }
+
+            return parsedInt;
         }
+    }
+
+    private static void AddTestData(AdressBook adressBook)
+    {
+        adressBook.AddContact(new() { FirstName = "Gun", LastName = "Gunsson", PhoneNumber = "0701234567", CountryCode = 46 });
+        adressBook.AddContact(new() { FirstName = "Alva", LastName = "Bolund", PhoneNumber = "0739876544", CountryCode = 46 });
+        adressBook.AddContact(new() { FirstName = "Lars", LastName = "Svensson", PhoneNumber = "070123321654", CountryCode = 46 });
+        adressBook.AddContact(new() { FirstName = "Maj", LastName = "Britt", PhoneNumber = "076098763456", CountryCode = 46 });
+        adressBook.AddContact(new() { FirstName = "Sven", LastName = "Larsson", PhoneNumber = "01033335544", CountryCode = 46 });
     }
 }
