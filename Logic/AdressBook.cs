@@ -1,32 +1,25 @@
 using System.Collections.ObjectModel;
-using System.Text.Json;
 
 class AdressBook
 {
-    public int Count { get => _contacts.Count; }
+    public int Count { get => _listOfContacts.Count; }
 
-    readonly List<Contact> _contacts = new();
-
-    public AdressBook()
-    {
-        //Load contacts here?
-    }
+    readonly List<Contact> _listOfContacts = new();
 
     public void AddContact(Contact contact)
     {
-        int lastId = 0;
-        _contacts.ForEach(c => lastId = c.Id > lastId ? c.Id : lastId);
-        contact.Id = lastId + 1;
-        _contacts.Add(contact);
+        int maxId = _listOfContacts.Max(c => c.Id);
+        contact.Id = maxId + 1;
+        _listOfContacts.Add(contact);
     }
 
     public ReadOnlyCollection<Contact> GetAllContacts()
     {
-        return new ReadOnlyCollection<Contact>(_contacts);
+        return new ReadOnlyCollection<Contact>(_listOfContacts);
     }
 
-    public void Save()
+    public void Search()
     {
-        //Do something here so that all the contacts can be saved?
+
     }
 }
