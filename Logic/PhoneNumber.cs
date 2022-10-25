@@ -1,5 +1,14 @@
 class CategoryValue
 {
-    public string Category { get; set; } = string.Empty;
+    public Category Category { get; set; } = Category.Mobile;
     public string Value { get; set; } = string.Empty;
+}
+
+enum Category
+{
+    Undefined,
+    Mobile,
+    Work,
+    Home,
+    Extra
 }

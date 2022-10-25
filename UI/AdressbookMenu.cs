@@ -28,11 +28,7 @@ class AdressBookMenu
                     break;
 
                 case 3:
-                    Console.Write("\nSearch: ");
-
-                    Console.WriteLine("<LIST SEARCH RESULTS HERE>");
-
-                    Console.ReadKey();
+                    SearchContacts();
                     break;
 
                 default:
@@ -42,10 +38,26 @@ class AdressBookMenu
         }
     }
 
+    private void SearchContacts()
+    {
+        Console.Write("Sökning: ");
+        string searchString = Console.ReadLine();
+
+        List<Contact> result = _adressbook.Search(searchString);
+
+        foreach (Contact currentContact in result)
+        {
+            Console.WriteLine(currentContact.Id + " " +
+                              currentContact.FullName + " " +
+                              currentContact.PhoneNumber.Value);
+        }
+
+        Console.ReadKey();
+    }
+
     private void Quit()
     {
         Console.WriteLine("AVSLUTAR...");
-        _adressbook.Save();
         Environment.Exit(0);
     }
 
@@ -71,7 +83,8 @@ class AdressBookMenu
         Console.WriteLine("KONTAKTER");
         foreach (var contact in _adressbook.GetAllContacts())
         {
-            Console.WriteLine(contact.FullName + Environment.NewLine +
+            Console.WriteLine(contact.Id + Environment.NewLine +
+                              contact.FullName + Environment.NewLine +
                               contact.PhoneNumber?.Value + Environment.NewLine);
         }
         Console.ReadLine();
