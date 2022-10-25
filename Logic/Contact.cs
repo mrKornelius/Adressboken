@@ -4,5 +4,5 @@ class Contact
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string FullName { get => FirstName + " " + LastName; }
-    public CategoryValue? PhoneNumber { get; set; }
+    public CategoryValue? PhoneNumber { get; set; } = new();
 }

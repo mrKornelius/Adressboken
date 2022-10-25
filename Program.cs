@@ -14,10 +14,12 @@
     {
         for (int i = 0; i < 1000; i++)
         {
-            Contact newContact = new();
-            newContact.FirstName = Faker.Name.First();
-            newContact.LastName = Faker.Name.Last();
-            newContact.PhoneNumber = new() { Category = Category.Work, Value = Faker.Phone.Number() };
+            Contact newContact = new()
+            {
+                FirstName = Faker.Name.First(),
+                LastName = Faker.Name.Last(),
+                PhoneNumber = new() { Category = Category.Work, Value = Faker.Phone.Number() }
+            };
             adressBook.AddContact(newContact);
         }
     }

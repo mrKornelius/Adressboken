@@ -8,25 +8,14 @@ class AdressBook
 
     public void AddContact(Contact contact)
     {
-        int maxId = 0;
-        if (_listOfContacts.Count > 0) maxId = _listOfContacts.Max(c => c.Id);
-        contact.Id = maxId + 1;
+        //Sätt id till 0 om det inte finns några contacts redan, annars till det högst id:t plus ett
+        contact.Id = _listOfContacts.Count > 0 ? _listOfContacts.Max(c => c.Id) + 1 : 0;
         _listOfContacts.Add(contact);
-    }
-
-    public List<Contact> GetContacts()
-    {
-        return new List<Contact>(_listOfContacts);
     }
 
     public ReadOnlyCollection<Contact> GetAllContacts()
     {
         return new ReadOnlyCollection<Contact>(_listOfContacts);
-    }
-
-    public List<Contact> GetAllElvis()
-    {
-        return Search("elvis");
     }
 
     public List<Contact> Search(string searchString)
