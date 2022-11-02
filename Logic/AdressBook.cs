@@ -6,11 +6,25 @@ class AdressBook
 
     readonly List<Contact> _listOfContacts = new();
 
+    IDataManager _dataManager;
+
+    public AdressBook(IDataManager dataManager)
+    {
+        _dataManager = dataManager;
+        _listOfContacts = _dataManager.Load();
+    }
+
     public void AddContact(Contact contact)
     {
         //Sätt id till 0 om det inte finns några contacts redan, annars till det högst id:t plus ett
         contact.Id = _listOfContacts.Count > 0 ? _listOfContacts.Max(c => c.Id) + 1 : 0;
         _listOfContacts.Add(contact);
+        Save();
+    }
+
+    public void Save()
+    {
+        _dataManager.Save(_listOfContacts);
     }
 
     public ReadOnlyCollection<Contact> GetAllContacts()
@@ -32,4 +46,5 @@ class AdressBook
 
         return searchResult;
     }
+
 }
