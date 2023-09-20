@@ -8,6 +8,7 @@ class FakeDataManager : IDataManager
         {
             Contact newContact = new()
             {
+                Id = i,
                 FirstName = Faker.Name.First(),
                 LastName = Faker.Name.Last(),
                 PhoneNumber = new() { Category = Category.Work, Value = Faker.Phone.Number() }
